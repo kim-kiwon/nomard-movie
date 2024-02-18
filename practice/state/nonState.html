@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="root"></div>
+</body>
+<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type ="text/babel">
+  const root = document.getElementById("root");
+  let counter = 0;
+
+  function countUp() {
+    counter = counter + 1;
+    render();  // count가 증가되어 countUp이 호출될 때 마다  Container를 다시 그려야한다.
+               // 일반 노드정보가 바뀌면 DOM을 처음부터 재구축하나, 리액트는 변경된 노드만 파악해 렌더링.
+  }
+
+  function render() {
+    ReactDOM.render(<Container />, root);
+  }
+
+  // JSX에서 텍스트에 변수를 출력하려면 {} 안에 넣어주기만 하면됨.
+  function Container() {
+    return (
+      <div>
+        <h3>Total clicks: {counter}</h3>
+        <button onClick={countUp}>
+          Click me
+        </button>
+      </div>
+    )
+  };
+
+  render();
+</script>
+</html>
+
+<!--
+- state가 없다면. 동적으로 변경된 부분을 HTML에 반영하기위해 reactDOM으로 다시 그려야한다.
+- React의 리렌더링
+  - React는 리렌더링 전후를 비교하여. 컴포넌트에서 변경된 부분을 파악해. 해당 부분만 리렌더링해 성능이 좋다.
+  - VanilaJS는 DOM 트리에서 수정된 노드가 있다면 전체 DOM을 다시 렌더링한다.
+-->

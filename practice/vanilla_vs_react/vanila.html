@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <span>Total clicks: 0</span>
+        <button id="btn">Click me</button>
+    </body>
+    <script>
+        let counter = 0;
+        const button = document.getElementById("btn");
+        const span = document.querySelector("span");
+        function handleClick() {
+          counter = counter + 1;
+          span.innerText = `Total clicks:${counter}`;
+        }
+        button.addEventListener("click", handleClick);
+    </script>
+</html>
+
+<!--
+1. HTML을 만든다.
+2. DOM을 통해 JS로 HTML 요소를 가져온다.
+3. event를 감지한다.
+4. 데이터를 업데이트한다.
+한계: Event가 추가될수록 Handler를 추가하고. Listener를 등록해야하는 하므로 점점 복잡해진다.
+-->

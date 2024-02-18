@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="root"></div>
+</body>
+<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+<script type ="text/babel">
+  const root = document.getElementById("root");
+
+  function Btn({text, fontSize = 14 }) {
+    return <button
+      style={{
+        backgroundColor: "tomato",
+        color: "white",
+        padding:"10px 20px",
+        border: 0,
+        borderRadius: 15,
+        fontSize,
+      }}>
+      { text }
+    </button>;
+  }
+
+  // Btn 컴포넌트의 propTypes 설정
+  Btn.propTypes = {
+    text: PropTypes.string.isRequired,
+    fontSize: PropTypes.number,
+  }
+
+  function App() {
+    return (
+      <div>
+        <Btn text="Save Changes" fontSize={20}/>
+        <Btn text="Save Changes" />
+      </div>
+    );
+  };
+
+  ReactDOM.render(<App />, root);
+</script>
+</html>
+
+<!--
+- prop-types
+  - prop가 많아진다면. prop의 타입을 헷갈릴 수 있다.
+  - 이를 위한 prop-types 라이브러리가 제공한다.
+  - prop-types는 컴포넌트에 명시된 prop가 들어오지 않는다면. 콘솔에 경고를 출력해준다.
+  - 타입이 잘못되도 HTML 적으로는 옳은 코드이므로. 브라우저에 출력은 되지만 경고가 발생한다.
+-->

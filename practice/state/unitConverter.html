@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="root"></div>
+</body>
+<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type ="text/babel">
+  const root = document.getElementById("root");
+  function App() {
+    const [amount, setAmount] = React.useState(0);
+    const [inverted, setInverted] = React.useState(false);
+
+    const onChange = (event) => { // onChange 콜백함수. event 객체를 넘겨주며 호출된다.
+      setAmount(event.target.value); // event.target.value로 minutes 변수값 갱신.
+    };
+
+    const reset = () => setAmount(0);
+
+    const onFlip = () => {
+      setInverted((current) => !current);
+      setAmount(0);
+    }
+
+    return (
+      <div>
+        <div>
+          <h1 className="hi">Super Converter</h1>
+          <label htmlFor="minutes">Minutes</label>
+          <input
+            value={inverted ? amount * 60 : amount}
+            id="minutes"
+            placeholder="Minutes"
+            type="number"
+            disabled={inverted}
+            onChange={onChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="hours">Hours</label>
+          <input
+            value={inverted ? amount : Math.round(amount / 60)}
+            id="hours"
+            placeholder="Hours"
+            type="number"
+            disabled={!inverted}
+            onChange={onChange}
+          />
+        </div>
+        <button onClick={ reset }> Reset </button>
+        <button onClick={ onFlip }> {inverted ? "Turn back" : "Invert"} </button>
+      </div>
+    );
+  }
+  ReactDOM.render(<App />, root);
+</script>
+</html>
+
+<!--
+- JSX는 Html과 매우 비슷하지만 다른게 몇가지 있다.
+  - class와 for는 JS에서 예약어이므로 clasName과 htmlFor로 사용해야한다.
+- inverted의 state로 minutes과 hour 중에 어떤 것을 disable 할지 정할 수 있었다.
+-->

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type ="text/babel">
+    /*
+    // createElement의 두번째 인자는 props. 속성, css, Event Listener 등록이 가능하다.
+    // React의 crateElement로 HTML 요소를 생성할 수 있다.
+    const btn = React.createElement(
+      "button",
+      {
+        onClick: () => console.log("I'm clicked"),
+        style: {
+          backgroundColor: "tomato",
+        }
+      },
+      "Click me"
+    );
+    */
+
+    const root = document.getElementById("root");
+
+    // jsx를 사용하면 HTML 포맷으로 React Element를 생성할 수 있다.
+    // babel이 내부에서 jsx -> React.createElement 로 변화시켜준다.
+    // React Element는 ReactDOM에 의해 HTML 요소로 추가된다.
+    // 직접 만든 컴포넌트를 다른 JSX 컴포넌트로 추가하려면. JSX 를 리턴하는 함수로 구현해야한다.
+    const Title = () => (
+      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+        Hello I'm a title
+      </h3>
+    );
+    const Button = () => (
+      <button style={{
+        backgroundColor: "tomato",
+      }} onClick={() => console.log("I'm clicked")}>
+        Click me
+      </button>
+    );
+
+    // 직접 만든 요소는 반드시 대문자로. 기존 HTML 태그와 구분하기 위해
+    // JSX를 반환하는 함수는 다른 JSX 내부에 추가될 수 있다.
+    const Container = (
+      <div>
+        <button>Hello</button>
+        <Title />
+        <Button />
+      </div>
+    );
+    ReactDOM.render(Container, root); // reactDOM으로 span 요소를 루트에 배치한다.
+  </script>
+</html>
+
+<!--
+react는 HTML 코드를 작성할 필요가 없다.
+바닐라: HTML 코드 작성 -> DOM에서 HTML 요소 가져옴 -> js로 HTML 요소를 제어
+리액트: js에서 HTML 요소 생성 -> HTML 코드에 반영
+-->
