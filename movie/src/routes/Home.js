@@ -24,6 +24,7 @@ function Home() {
         {movies.map(movie =>
           <Movie
             key={movie.id} // map 등 순회시 key 값은 필수
+            id={movie.id} // 동적 페이지 렌더링을 위해 넘겨주는 id
             coverImg={movie.medium_cover_image}
             title={movie.title}
             summary={movie.summary}
